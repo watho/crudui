@@ -1,5 +1,11 @@
 package org.vaadin.crudui.layout.impl;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.vaadin.crudui.crud.CrudOperation;
+import org.vaadin.crudui.layout.CrudLayout;
+
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.HasSize;
@@ -10,11 +16,6 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import org.vaadin.crudui.crud.CrudOperation;
-import org.vaadin.crudui.layout.CrudLayout;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author Alejandro Duarte
@@ -56,18 +57,20 @@ public class WindowBasedCrudLayout extends Composite<VerticalLayout> implements 
         filterLayout.setSpacing(true);
         headerLayout.add(filterLayout);
 
-        Icon icon = VaadinIcon.SEARCH.create();
+        final Icon icon = VaadinIcon.SEARCH.create();
         icon.setSize(".9em");
         filterLayout.add(icon);
 
-        mainComponentLayout.setSizeFull();
+        mainComponentLayout.setWidth("100%");
+        mainComponentLayout.setHeight(null);
         mainComponentLayout.setMargin(false);
         mainComponentLayout.setPadding(false);
+        mainComponentLayout.setId("mainComponentLayout");
         mainLayout.add(mainComponentLayout);
         mainLayout.expand(mainComponentLayout);
 
         setWindowCaption(CrudOperation.ADD, "Add");
-        setWindowCaption(CrudOperation.COPY, "Copy");
+	setWindowCaption(CrudOperation.COPY, "Copy");
         setWindowCaption(CrudOperation.UPDATE, "Update");
         setWindowCaption(CrudOperation.DELETE, "Are you sure you want to delete this item?");
     }
@@ -101,7 +104,7 @@ public class WindowBasedCrudLayout extends Composite<VerticalLayout> implements 
     }
 
     private void showDialog(String caption, Component form) {
-        VerticalLayout dialogLayout = new VerticalLayout(form);
+        final VerticalLayout dialogLayout = new VerticalLayout(form);
         dialogLayout.setWidth("100%");
         dialogLayout.setMargin(false);
         dialogLayout.setPadding(false);
