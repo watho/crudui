@@ -57,7 +57,7 @@ public class WindowBasedCrudLayout extends Composite<VerticalLayout> implements 
         filterLayout.setSpacing(true);
         headerLayout.add(filterLayout);
 
-        final Icon icon = VaadinIcon.SEARCH.create();
+        Icon icon = VaadinIcon.SEARCH.create();
         icon.setSize(".9em");
         filterLayout.add(icon);
 
@@ -69,10 +69,10 @@ public class WindowBasedCrudLayout extends Composite<VerticalLayout> implements 
         mainLayout.add(mainComponentLayout);
         mainLayout.expand(mainComponentLayout);
 
-        setWindowCaption(CrudOperation.ADD, "Add");
-	setWindowCaption(CrudOperation.COPY, "Copy");
-        setWindowCaption(CrudOperation.UPDATE, "Update");
-        setWindowCaption(CrudOperation.DELETE, "Are you sure you want to delete this item?");
+		setWindowCaption(CrudOperation.ADD, "Add");
+		setWindowCaption(CrudOperation.COPY, "Copy");
+		setWindowCaption(CrudOperation.UPDATE, "Update");
+		setWindowCaption(CrudOperation.DELETE, "Are you sure you want to delete this item?");
     }
 
     @Override
@@ -103,8 +103,9 @@ public class WindowBasedCrudLayout extends Composite<VerticalLayout> implements 
         toolbarLayout.add(component);
     }
 
-    private void showDialog(String caption, Component form) {
-        final VerticalLayout dialogLayout = new VerticalLayout(form);
+    @Override
+    public void showDialog(String caption, Component form) {
+        VerticalLayout dialogLayout = new VerticalLayout(form);
         dialogLayout.setWidth("100%");
         dialogLayout.setMargin(false);
         dialogLayout.setPadding(false);
@@ -115,9 +116,10 @@ public class WindowBasedCrudLayout extends Composite<VerticalLayout> implements 
     }
 
     @Override
-    public void showForm(CrudOperation operation, Component form) {
+	public void showForm(CrudOperation operation, Component form, String formCaption) {
         if (!operation.equals(CrudOperation.READ)) {
-            showDialog(windowCaptions.get(operation), form);
+        	String caption = (formCaption != null ? formCaption : windowCaptions.get(operation));
+			showDialog(caption, form);
         }
     }
 

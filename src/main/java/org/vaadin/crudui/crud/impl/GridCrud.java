@@ -161,8 +161,8 @@ public class GridCrud<T> extends AbstractCrud<T> {
                 Component form = crudFormFactory.buildNewForm(CrudOperation.READ, domainObject, true, null, event -> {
                     grid.asSingleSelect().clear();
                 });
-
-                crudLayout.showForm(CrudOperation.READ, form);
+                String caption = crudFormFactory.buildCaption(CrudOperation.READ, domainObject);
+				crudLayout.showForm(CrudOperation.READ, form, caption);
             }
         } else {
             crudLayout.hideForm();
@@ -265,8 +265,8 @@ public class GridCrud<T> extends AbstractCrud<T> {
             buttonClickListener.onComponentEvent(operationPerformedClickEvent);
             showNotification(successMessage);
         });
-
-        crudLayout.showForm(operation, form);
+        String caption = crudFormFactory.buildCaption(operation, domainObject);
+        crudLayout.showForm(operation, form, caption);
     }
 
     public Grid<T> getGrid() {
